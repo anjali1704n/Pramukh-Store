@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pramukh Super Mart | General Store in Pasodara, Surat</title>
+    <meta name="description" content="Pramukh Super Mart - Your trusted general and grocery store in Pasodara, Surat. Fresh groceries, farsan, sweets, cold drinks, and daily essentials. Open daily till 8:30 PM.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-600 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-900 text-white text-xs sm:text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 text-center">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1 bg-brand-700 text-blue-100 px-2 py-0.5 rounded-full font-medium">
+                    <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span> Open Daily • Closes 8:30 PM
+                </span>
+                <span class="hidden md:inline text-brand-200">|</span>
+                <span class="hidden md:inline text-brand-100">Pasodara Road, Surat General Store</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="tel:08141679293" class="hover:text-accent-400 transition flex items-center gap-1.5 font-medium">
+                    <i class="fa-solid fa-phone text-accent-400"></i> 081416 79293
+                </a>
+                <span class="text-brand-600">|</span>
+                <span class="text-accent-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-star"></i> 4.0 (25 Reviews)
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+                <!-- Brand Logo -->
+                <button onclick="switchView('home')" class="flex items-center gap-3 shrink-0 group text-left cursor-pointer bg-transparent border-0">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-brand-600 to-brand-900 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition">
+                        <i class="fa-solid fa-store text-lg sm:text-xl text-accent-400"></i>
+                    </div>
+                    <div>
+                        <span class="block text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 leading-none">
+                            Pramukh <span class="text-brand-600">Super Mart</span>
+                        </span>
+                        <span class="block text-[11px] sm:text-xs font-medium text-slate-500 mt-0.5">
+                            General Store • Pasodara
+                        </span>
+                    </div>
+                </button>
+
+                <!-- Desktop Search Bar (visible in products view) -->
+                <div id="desktopSearchWrapper" class="hidden flex-1 max-w-md mx-4">
+                    <div class="relative w-full">
+                        <input type="text" id="desktopSearch" placeholder="Search 20+ items, farsan, sweets, dal, oil..."
+                            class="w-full pl-10 pr-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:outline-none focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    </div>
+                </div>
+
+                <!-- Desktop Single-Page View Nav Links -->
+                <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+                    <button onclick="switchView('home')" id="navHome" class="nav-link text-brand-600 font-bold transition cursor-pointer">Home</button>
+                    <button onclick="switchView('products')" id="navProducts" class="nav-link hover:text-brand-600 transition cursor-pointer">Products (20)</button>
+                    <button onclick="switchView('about')" id="navAbout" class="nav-link hover:text-brand-600 transition cursor-pointer">About</button>
+                    <button onclick="switchView('reviews')" id="navReviews" class="nav-link hover:text-brand-600 transition cursor-pointer">Reviews</button>
+                    <button onclick="switchView('contact')" id="navContact" class="nav-link hover:text-brand-600 transition cursor-pointer">Contact</button>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Cart / Order List Drawer Trigger -->
+                    <button onclick="toggleCartDrawer()" aria-label="View WhatsApp Order List"
+                        class="relative p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-100 hover:bg-brand-50 text-slate-700 hover:text-brand-700 border border-slate-200 transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-bag-shopping text-brand-600 text-base"></i>
+                        <span class="hidden sm:inline text-sm font-semibold">Order List</span>
+                        <span id="cartBadge" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold rounded-full bg-accent-500 text-white">0</span>
+                    </button>
+
+                    <!-- Direct WhatsApp CTA -->
+                    <a href="https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer"
+                        class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold shadow-sm hover:shadow transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>WhatsApp</span>
+                    </a>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button onclick="toggleMobileMenu()" aria-label="Toggle Menu"
+                        class="md:hidden p-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition cursor-pointer">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+            <button onclick="switchView('home'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-700">Home</button>
+            <button onclick="switchView('products'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-700">Products (20)</button>
+            <button onclick="switchView('about'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-700">About Us</button>
+            <button onclick="switchView('reviews'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-700">Customer Reviews (4.0 ★)</button>
+            <button onclick="switchView('contact'); toggleMobileMenu();" class="w-full text-left px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-brand-50 hover:text-brand-700">Location &amp; Contact</button>
+            <div class="pt-2 grid grid-cols-2 gap-2">
+                <a href="tel:08141679293" class="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold">
+                    <i class="fa-solid fa-phone"></i> Call Store
+                </a>
+                <a href="https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-accent-500 text-white text-sm font-semibold">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APP VIEWS CONTAINER -->
+    <main>
+
+        <!-- ================= HOME VIEW (Default) ================= -->
+        <div id="viewHome" class="app-view">
+            <!-- Hero Banner Section -->
+            <section class="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-slate-900 text-white">
+                <div class="absolute inset-0 opacity-10 pointer-events-none">
+                    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-accent-500 blur-3xl"></div>
+                    <div class="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-brand-500 blur-3xl"></div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex flex-wrap items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-3.5 py-1.5 rounded-full text-xs sm:text-sm">
+                                <span class="flex items-center text-accent-400 font-bold gap-1">
+                                    4.0 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-white/50"></i>
+                                </span>
+                                <span class="text-blue-100 font-medium">(25 Google Reviews)</span>
+                                <span class="text-white/40">•</span>
+                                <span class="text-accent-400 font-semibold">Pasodara, Surat</span>
+                            </div>
+
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                                Your Neighborhood General Store: <span class="text-accent-400">Pramukh Super Mart</span>
+                            </h1>
+
+                            <p class="text-base sm:text-lg text-blue-100/90 max-w-2xl leading-relaxed">
+                                Located at Shop No 11/12, Shree Umiya Farsan &amp; Sweet Mart, Saurashtra Residency, Pasodara Rd, Surat. Your one-stop shop for fresh groceries, farsan, sweets, and daily household essentials.
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+                                <a href="https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!%20I%20want%20to%20order%20groceries." target="_blank" rel="noopener noreferrer"
+                                    class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-accent-500 hover:bg-accent-600 text-white font-bold text-base shadow-lg shadow-orange-500/20 transition transform hover:-translate-y-0.5">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                                    <span>Order on WhatsApp</span>
+                                </a>
+                                <button onclick="switchView('products')"
+                                    class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold text-base backdrop-blur-sm transition cursor-pointer">
+                                    <span>Browse 20+ Products</span>
+                                    <i class="fa-solid fa-arrow-right text-sm"></i>
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-white/15 text-xs sm:text-sm">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-brand-700/80 flex items-center justify-center text-accent-400 shrink-0">
+                                        <i class="fa-regular fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">Open • Closes 8:30 PM</p>
+                                        <p class="text-blue-200/80 text-xs">All 7 Days</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-brand-700/80 flex items-center justify-center text-accent-400 shrink-0">
+                                        <i class="fa-solid fa-phone-volume"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">081416 79293</p>
+                                        <p class="text-blue-200/80 text-xs">Quick Phone Order</p>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1 flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-xl bg-brand-700/80 flex items-center justify-center text-accent-400 shrink-0">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-white">Pasodara Rd</p>
+                                        <p class="text-blue-200/80 text-xs">Surat, Gujarat</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Store Highlight Card -->
+                        <div class="lg:col-span-5">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div>
+                                        <span class="text-xs font-bold uppercase tracking-wider text-accent-400">Store Departments</span>
+                                        <h2 class="text-xl font-bold text-white mt-0.5">Explore 20+ Items</h2>
+                                    </div>
+                                    <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-200 text-xs font-semibold">
+                                        ● Open Now
+                                    </span>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3.5">
+                                    <button onclick="switchView('products'); filterByCategory('Farsan & Sweets');" class="text-left bg-white/10 hover:bg-white/20 border border-white/15 rounded-2xl p-4 transition group cursor-pointer">
+                                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🥨</div>
+                                        <h3 class="font-bold text-white text-sm">Farsan &amp; Sweets</h3>
+                                        <p class="text-xs text-blue-200 mt-0.5">Namkeen, Gathiya, Ladoo</p>
+                                    </button>
+                                    <button onclick="switchView('products'); filterByCategory('Grains & Pulses');" class="text-left bg-white/10 hover:bg-white/20 border border-white/15 rounded-2xl p-4 transition group cursor-pointer">
+                                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌾</div>
+                                        <h3 class="font-bold text-white text-sm">Grains &amp; Pulses</h3>
+                                        <p class="text-xs text-blue-200 mt-0.5">Atta, Rice, Dal</p>
+                                    </button>
+                                    <button onclick="switchView('products'); filterByCategory('Spices & Oils');" class="text-left bg-white/10 hover:bg-white/20 border border-white/15 rounded-2xl p-4 transition group cursor-pointer">
+                                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🌶️</div>
+                                        <h3 class="font-bold text-white text-sm">Spices &amp; Oils</h3>
+                                        <p class="text-xs text-blue-200 mt-0.5">Cooking Oil, Masala</p>
+                                    </button>
+                                    <button onclick="switchView('products'); filterByCategory('Snacks & Beverages');" class="text-left bg-white/10 hover:bg-white/20 border border-white/15 rounded-2xl p-4 transition group cursor-pointer">
+                                        <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">🥤</div>
+                                        <h3 class="font-bold text-white text-sm">Snacks &amp; Drinks</h3>
+                                        <p class="text-xs text-blue-200 mt-0.5">Biscuits, Cold Drinks</p>
+                                    </button>
+                                </div>
+
+                                <div class="mt-6 pt-5 border-t border-white/15 flex items-center justify-between text-xs text-blue-100">
+                                    <span><i class="fa-solid fa-check-circle text-accent-400 mr-1"></i> Quality Assured</span>
+                                    <span><i class="fa-solid fa-check-circle text-accent-400 mr-1"></i> Best General Store</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Home Preview Highlight Row -->
+            <section class="py-14 bg-white border-b border-slate-200">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full">
+                                Featured Products
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                                Popular Items at Pramukh Super Mart
+                            </h2>
+                            <p class="text-slate-600 text-sm sm:text-base mt-1">
+                                Check out our top-selling daily essentials and snacks.
+                            </p>
+                        </div>
+                        <button onclick="switchView('products')" class="inline-flex items-center gap-2 text-sm font-bold text-brand-600 hover:text-brand-700 transition cursor-pointer">
+                            <span>View All 20 Products</span> <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Top 4 Preview Grid -->
+                    <div id="homeFeaturedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PRODUCTS VIEW ================= -->
+        <div id="viewProducts" class="app-view hidden py-10 sm:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-100 px-3 py-1 rounded-full">
+                            Complete Catalog (20 Items)
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                            Shop General &amp; Grocery Items
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base mt-1">
+                            Add items to your order list and send directly to <strong class="text-slate-800">Pramukh Super Mart</strong> on WhatsApp.
+                        </p>
+                    </div>
+                    <div class="text-sm text-slate-500 font-medium">
+                        Showing <span id="productCount" class="font-bold text-slate-900">20</span> items
+                    </div>
+                </div>
+
+                <!-- Search & Category Filters -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8">
+                    <!-- Category Filter Pills -->
+                    <div id="categoryTabs" class="flex items-center gap-2.5 overflow-x-auto pb-2 no-scrollbar">
+                        <button onclick="filterByCategory('All')" data-category="All"
+                            class="cat-btn active shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-brand-600 text-white shadow-sm cursor-pointer">
+                            All Items (20)
+                        </button>
+                        <button onclick="filterByCategory('Farsan & Sweets')" data-category="Farsan & Sweets"
+                            class="cat-btn shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-600 cursor-pointer">
+                            🥨 Farsan &amp; Sweets
+                        </button>
+                        <button onclick="filterByCategory('Grains & Pulses')" data-category="Grains & Pulses"
+                            class="cat-btn shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-600 cursor-pointer">
+                            🌾 Grains &amp; Pulses
+                        </button>
+                        <button onclick="filterByCategory('Spices & Oils')" data-category="Spices & Oils"
+                            class="cat-btn shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-600 cursor-pointer">
+                            🌶️ Spices &amp; Oils
+                        </button>
+                        <button onclick="filterByCategory('Snacks & Beverages')" data-category="Snacks & Beverages"
+                            class="cat-btn shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-600 cursor-pointer">
+                            🥤 Snacks &amp; Drinks
+                        </button>
+                        <button onclick="filterByCategory('Home & Personal Care')" data-category="Home & Personal Care"
+                            class="cat-btn shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-600 cursor-pointer">
+                            🧼 Home &amp; Care
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Grid (Exact 20 products) -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Products populated via JavaScript -->
+                </div>
+
+                <!-- Empty Search State -->
+                <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-200">
+                    <div class="text-5xl mb-3">🔍</div>
+                    <h3 class="text-lg font-bold text-slate-900">No matching items found</h3>
+                    <p class="text-slate-500 text-sm mt-1 max-w-md mx-auto">
+                        Can't find what you need? We stock more items at our Pasodara store! Send us your list directly on WhatsApp.
+                    </p>
+                    <div class="mt-5 flex justify-center gap-3">
+                        <button onclick="resetFilters()" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold transition cursor-pointer">
+                            Reset Search
+                        </button>
+                        <a href="https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!%20Do%20you%20have%20..." target="_blank" rel="noopener noreferrer"
+                            class="px-5 py-2.5 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-semibold transition inline-flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp"></i> Ask on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ABOUT VIEW ================= -->
+        <div id="viewAbout" class="app-view hidden py-14 sm:py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full">
+                        Why Shop With Us
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                        Trusted General Store in Pasodara, Surat
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-2">
+                        Located at Shop No 11/12, Shree Umiya Farsan &amp; Sweet Mart, Saurashtra Residency, Pasodara Road. We bring quality daily groceries, snacks, and sweets right to your neighborhood.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-brand-300 transition">
+                        <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-700 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Fresh Farsan &amp; Sweets</h3>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            Delicious local farsan, namkeen, and sweets available fresh daily from Umiya Farsan collaboration.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-brand-300 transition">
+                        <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-700 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Pasodara Delivery</h3>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            Quick home delivery across Saurashtra Residency and surrounding societies in Pasodara, Surat.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-brand-300 transition">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Best Everyday Rates</h3>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            Competitive retail and monthly ration prices on all branded and loose grocery goods.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 hover:border-brand-300 transition">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Open Till 8:30 PM</h3>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            Open daily until 8:30 PM for all your evening snack and urgent grocery requirements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= REVIEWS VIEW ================= -->
+        <div id="viewReviews" class="app-view hidden py-14 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-3 py-1 rounded-full">
+                            Google Rating • 4.0 ★
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                            What Our Customers Say
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base mt-1">
+                            Rated <strong>4.0 out of 5 stars</strong> across 25 verified Google Reviews.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-white px-5 py-3.5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="text-3xl font-extrabold text-slate-900">4.0</div>
+                        <div>
+                            <div class="flex text-accent-400 text-sm">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star text-slate-300"></i>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium mt-0.5">Based on 25 Google Reviews</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex text-accent-400 text-sm">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400">Google Review</span>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed">
+                                "Great general store in Saurashtra Residency, Pasodara. Very convenient location at Shop No 11/12. Fresh farsan and all daily grocery items available."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
+                            <div class="w-9 h-9 rounded-full bg-brand-100 text-brand-700 font-bold flex items-center justify-center text-sm">KP</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Ketan Prajapati</p>
+                                <p class="text-xs text-slate-500">Pasodara, Surat</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex text-accent-400 text-sm">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400">Google Review</span>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed">
+                                "Wonderful store! I often buy snacks, cold drinks, and daily ration items here. The shopkeeper is very polite and helpful."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
+                            <div class="w-9 h-9 rounded-full bg-orange-100 text-orange-700 font-bold flex items-center justify-center text-sm">HN</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Hetal Nanavati</p>
+                                <p class="text-xs text-slate-500">Saurashtra Residency</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex text-accent-400 text-sm">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i>
+                                </div>
+                                <span class="text-xs font-medium text-slate-400">Google Review</span>
+                            </div>
+                            <p class="text-slate-700 text-sm leading-relaxed">
+                                "Clean general store with good variety. Very accessible on Pasodara Road. Open till 8:30 PM which is extremely helpful."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
+                            <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-sm">VM</div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900">Vimal Mehta</p>
+                                <p class="text-xs text-slate-500">Pasodara, Surat</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= CONTACT VIEW ================= -->
+        <div id="viewContact" class="app-view hidden bg-slate-900 text-white py-14 sm:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+                    <!-- Contact Details Card -->
+                    <div class="lg:col-span-5 bg-slate-800/80 border border-slate-700 rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-accent-400">Visit or Order Today</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+                                Pramukh Super Mart
+                            </h2>
+                            <p class="text-slate-300 text-sm mt-2">
+                                General Store • 4.0 ★ (25 Google Reviews)
+                            </p>
+
+                            <div class="space-y-5 mt-8">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 text-brand-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-bold text-white">Store Address</h3>
+                                        <p class="text-sm text-slate-300 mt-1 leading-relaxed">
+                                            Shop No 11 /12, SHREE UMIYA FARSAN AND SWEET MART, Saurashtra Residency, Pasodara Rd, Pasodara, Surat, Gujarat 395013
+                                        </p>
+                                        <button onclick="copyAddress()" class="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-accent-400 hover:text-accent-300 transition cursor-pointer">
+                                            <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy Address</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 text-brand-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-regular fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-bold text-white">Opening Hours</h3>
+                                        <p class="text-sm text-emerald-400 font-semibold mt-1">
+                                            Open Daily • Closes at 8:30 PM
+                                        </p>
+                                        <p class="text-xs text-slate-400 mt-0.5">Monday to Sunday</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 text-brand-400 flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-bold text-white">Phone &amp; WhatsApp</h3>
+                                        <a href="tel:08141679293" class="block text-base font-bold text-white hover:text-accent-400 transition mt-0.5">
+                                            081416 79293
+                                        </a>
+                                        <p class="text-xs text-slate-400 mt-0.5">Call or message for home delivery &amp; availability</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8 pt-6 border-t border-slate-700">
+                            <a href="tel:08141679293"
+                                class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-sm transition">
+                                <i class="fa-solid fa-phone text-brand-600"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer"
+                                class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-accent-500 hover:bg-accent-600 text-white font-bold text-sm transition">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Order
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Embedded Google Map -->
+                    <div class="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-700 shadow-xl min-h-[360px] sm:min-h-[440px] relative bg-slate-800">
+                        <iframe
+                            title="Pramukh Super Mart Location Map - Pasodara, Surat"
+                            src="https://maps.google.com/maps?q=Pramukh%20Super%20Mart%20Shree%20Umiya%20Farsan%20And%20Sweet%20Mart%20Saurashtra%20Residency%20Pasodara%20Rd%20Surat%20Gujarat%20395013&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                            class="w-full h-full min-h-[360px] sm:min-h-[440px] border-0"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Pramukh+Super+Mart+Shree+Umiya+Farsan+And+Sweet+Mart+Saurashtra+Residency+Pasodara+Rd+Surat+Gujarat+395013"
+                            target="_blank" rel="noopener noreferrer"
+                            class="absolute bottom-4 right-4 bg-white text-slate-900 hover:bg-slate-100 px-4 py-2.5 rounded-xl shadow-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-diamond-turn-right text-brand-600"></i> Open in Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-800/80 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-slate-800">
+                <div>
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-store text-accent-400"></i>
+                        </div>
+                        <span class="text-lg font-extrabold text-white">Pramukh <span class="text-brand-500">Super Mart</span></span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-400 mt-2 max-w-md">
+                        Shop No 11 /12, Shree Umiya Farsan and Sweet Mart, Saurashtra Residency, Pasodara Rd, Pasodara, Surat, Gujarat 395013
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-5 text-sm font-medium">
+                    <button onclick="switchView('home')" class="hover:text-white transition bg-transparent border-0 cursor-pointer">Home</button>
+                    <button onclick="switchView('products')" class="hover:text-white transition bg-transparent border-0 cursor-pointer">Products (20)</button>
+                    <button onclick="switchView('about')" class="hover:text-white transition bg-transparent border-0 cursor-pointer">About</button>
+                    <button onclick="switchView('reviews')" class="hover:text-white transition bg-transparent border-0 cursor-pointer">Reviews</button>
+                    <button onclick="switchView('contact')" class="hover:text-white transition bg-transparent border-0 cursor-pointer">Contact</button>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                <p>&copy; <span id="currentYear"></span> Pramukh Super Mart, Pasodara, Surat. All rights reserved.</p>
+                <p>Open Daily till 8:30 PM • Phone: <a href="tel:08141679293" class="text-slate-300 hover:text-white">081416 79293</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        class="fixed bottom-5 right-5 z-40 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-xl flex items-center justify-center text-2xl transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- WhatsApp Quick Order List Slide-Over Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+        <div onclick="toggleCartDrawer()" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity"></div>
+        <div class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col z-10">
+            <div class="px-6 py-4 bg-brand-900 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-brands fa-whatsapp text-2xl text-accent-400"></i>
+                    <div>
+                        <h3 class="font-bold text-base">Your WhatsApp Order List</h3>
+                        <p class="text-xs text-blue-200">Pramukh Super Mart • Pasodara, Surat</p>
+                    </div>
+                </div>
+                <button onclick="toggleCartDrawer()" aria-label="Close Order List" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-3">
+                <!-- Cart items injected here -->
+            </div>
+
+            <div class="p-6 bg-slate-50 border-t border-slate-200 space-y-4">
+                <div class="flex items-center justify-between text-sm">
+                    <span class="text-slate-600 font-medium">Estimated Total</span>
+                    <span id="cartTotal" class="text-xl font-extrabold text-slate-900">₹0</span>
+                </div>
+                <p class="text-xs text-slate-500">
+                    * Final bill &amp; home delivery availability in Pasodara will be confirmed on WhatsApp.
+                </p>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="clearCart()" class="col-span-1 py-3 px-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition cursor-pointer">
+                        Clear
+                    </button>
+                    <button onclick="sendWhatsAppOrder()" class="col-span-2 py-3 px-4 rounded-xl bg-accent-500 hover:bg-accent-600 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md transition cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Send Order on WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-22 left-1/2 -translate-x-1/2 z-50 hidden bg-slate-900 text-white px-4 py-2.5 rounded-xl shadow-xl text-xs sm:text-sm font-medium flex items-center gap-2 border border-slate-700">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span id="toastMessage">Added to order list!</span>
+    </div>
+
+    <!-- Application Script with exact 20 products & single-page view controller -->
+    <script>
+        // Exact 20 Products catalog with accurate Indian grocery / farsan names and image URLs
+        const products = [
+            {
+                id: 1,
+                name: "Umiya Special Bhavnagari Gathiya",
+                category: "Farsan & Sweets",
+                weight: "400 g Pack",
+                price: 110,
+                badge: "Best Seller",
+                image: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "Aashirvaad Sharbati Atta",
+                category: "Grains & Pulses",
+                weight: "5 kg Pack",
+                price: 240,
+                badge: "Top Quality",
+                image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "Premium Unpolished Toor Dal",
+                category: "Grains & Pulses",
+                weight: "1 kg Pack",
+                price: 155,
+                badge: "Fresh Stock",
+                image: "https://images.unsplash.com/photo-1585998006490-67c4e51240c5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "Fortune Groundnut Cooking Oil",
+                category: "Spices & Oils",
+                weight: "1 Litre Pouch",
+                price: 170,
+                badge: "Popular",
+                image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "Everest Kashmiri Lal Mirch",
+                category: "Spices & Oils",
+                weight: "200 g Box",
+                price: 95,
+                badge: "Pure Spice",
+                image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 6,
+                name: "Everest Turmeric Powder (Haldi)",
+                category: "Spices & Oils",
+                weight: "200 g Box",
+                price: 52,
+                badge: null,
+                image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 7,
+                name: "Haldiram Nagpur Gulab Jamun",
+                category: "Farsan & Sweets",
+                weight: "1 kg Tin",
+                price: 220,
+                badge: "Sweet Special",
+                image: "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 8,
+                name: "Traditional Nylon Sev",
+                category: "Farsan & Sweets",
+                weight: "350 g Pack",
+                price: 85,
+                badge: null,
+                image: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 9,
+                name: "Balaji Masala Masti Wafers",
+                category: "Snacks & Beverages",
+                weight: "150 g Pack",
+                price: 35,
+                badge: "Kids Fav",
+                image: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 10,
+                name: "Thums Up Cold Drink",
+                category: "Snacks & Beverages",
+                weight: "750 ml Bottle",
+                price: 45,
+                badge: "Chilled",
+                image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 11,
+                name: "Surf Excel Detergent Powder",
+                category: "Home & Personal Care",
+                weight: "1 kg Pack",
+                price: 138,
+                badge: null,
+                image: "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 12,
+                name: "Dettol Bathing Soap (Pack of 4)",
+                category: "Home & Personal Care",
+                weight: "4 x 125 g",
+                price: 160,
+                badge: "Value Pack",
+                image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 13,
+                name: "Tata Salt Iodised",
+                category: "Grains & Pulses",
+                weight: "1 kg Pack",
+                price: 28,
+                badge: null,
+                image: "https://images.unsplash.com/photo-1518112166668-972b7e29687e?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 14,
+                name: "Fortune Sunite Sunflower Oil",
+                category: "Spices & Oils",
+                weight: "1 Litre Pouch",
+                price: 145,
+                badge: "Essential",
+                image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 15,
+                name: "Brooke Bond Red Label Tea",
+                category: "Spices & Oils",
+                weight: "250 g Box",
+                price: 150,
+                badge: "Top Quality",
+                image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 16,
+                name: "Parle-G Gold Biscuits",
+                category: "Snacks & Beverages",
+                weight: "250 g Pack",
+                price: 25,
+                badge: "Teatime",
+                image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 17,
+                name: "Colgate Strong Teeth Toothpaste",
+                category: "Home & Personal Care",
+                weight: "150 g Tube",
+                price: 95,
+                badge: null,
+                image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 18,
+                name: "Madhur Pure Crystal Sugar",
+                category: "Grains & Pulses",
+                weight: "1 kg Pack",
+                price: 48,
+                badge: null,
+                image: "https://images.unsplash.com/photo-1581404476143-3fb1d6d12b16?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 19,
+                name: "Maggi 2-Minute Masala Noodles",
+                category: "Snacks & Beverages",
+                weight: "Pack of 4",
+                price: 60,
+                badge: "Snack Fav",
+                image: "https://images.unsplash.com/photo-1612927601601-66384047381a?auto=format&fit=crop&w=600&q=80"
+            },
+            {
+                id: 20,
+                name: "Umiya Special Moong Dal Farsan",
+                category: "Farsan & Sweets",
+                weight: "300 g Pack",
+                price: 75,
+                badge: "Fresh Farsan",
+                image: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&w=600&q=80"
+            }
+        ];
+
+        // State
+        let currentCategory = "All";
+        let searchQuery = "";
+        let cart = {}; // { productId: quantity }
+        let currentActiveView = "home";
+
+        // DOM Elements
+        const productGrid = document.getElementById("productGrid");
+        const homeFeaturedGrid = document.getElementById("homeFeaturedGrid");
+        const productCount = document.getElementById("productCount");
+        const emptyState = document.getElementById("emptyState");
+        const desktopSearch = document.getElementById("desktopSearch");
+        const desktopSearchWrapper = document.getElementById("desktopSearchWrapper");
+        const cartBadge = document.getElementById("cartBadge");
+        const cartItemsContainer = document.getElementById("cartItemsContainer");
+        const cartTotal = document.getElementById("cartTotal");
+
+        // Initialize Page
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("currentYear").textContent = new Date().getFullYear();
+            switchView("home");
+            renderProducts();
+            renderHomeFeatured();
+            renderCart();
+
+            if (desktopSearch) {
+                desktopSearch.addEventListener("input", (e) => {
+                    searchQuery = e.target.value.trim().toLowerCase();
+                    renderProducts();
+                });
+            }
+        });
+
+        // Single-Page View Switcher
+        function switchView(viewName) {
+            currentActiveView = viewName;
+            const views = ['home', 'products', 'about', 'reviews', 'contact'];
+            
+            views.forEach(v => {
+                const el = document.getElementById(`view${v.charAt(0).toUpperCase() + v.slice(1)}`);
+                if (el) {
+                    if (v === viewName) {
+                        el.classList.remove("hidden");
+                    } else {
+                        el.classList.add("hidden");
+                    }
+                }
+            });
+
+            // Update nav link styles
+            views.forEach(v => {
+                const navBtn = document.getElementById(`nav${v.charAt(0).toUpperCase() + v.slice(1)}`);
+                if (navBtn) {
+                    if (v === viewName) {
+                        navBtn.className = "nav-link text-brand-600 font-bold transition cursor-pointer";
+                    } else {
+                        navBtn.className = "nav-link hover:text-brand-600 transition cursor-pointer";
+                    }
+                }
+            });
+
+            // Show or hide desktop search bar based on view
+            if (desktopSearchWrapper) {
+                if (viewName === 'products') {
+                    desktopSearchWrapper.classList.remove('hidden');
+                } else {
+                    desktopSearchWrapper.classList.add('hidden');
+                }
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Category Filter Handler
+        function filterByCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll(".cat-btn").forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.className = "cat-btn active shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-brand-600 text-white shadow-sm cursor-pointer";
+                } else {
+                    btn.className = "cat-btn shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold transition bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-600 cursor-pointer";
+                }
+            });
+            renderProducts();
+        }
+
+        function resetFilters() {
+            searchQuery = "";
+            if (desktopSearch) desktopSearch.value = "";
+            filterByCategory("All");
+        }
+
+        // Render Top 4 Featured Products on Home Page
+        function renderHomeFeatured() {
+            if (!homeFeaturedGrid) return;
+            const featured = products.slice(0, 4);
+            homeFeaturedGrid.innerHTML = featured.map(item => {
+                const qty = cart[item.id] || 0;
+                return `
+                <div class="bg-white rounded-3xl border border-slate-200/90 p-5 flex flex-col justify-between hover:shadow-lg hover:border-brand-300 transition group">
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-3">
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">
+                                ${item.category}
+                            </span>
+                            ${item.badge ? `<span class="text-[11px] font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2.5 py-0.5 rounded-full">${item.badge}</span>` : ""}
+                        </div>
+
+                        <div class="h-36 rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=Grocery';">
+                        </div>
+
+                        <h3 class="font-bold text-slate-900 text-base leading-snug">${item.name}</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">${item.weight}</p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Price</span>
+                            <span class="text-lg font-extrabold text-slate-900">₹${item.price}</span>
+                        </div>
+
+                        ${qty === 0 ? `
+                            <button onclick="updateCart(${item.id}, 1)"
+                                class="px-3.5 py-2 rounded-xl bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 text-xs sm:text-sm font-bold transition flex items-center gap-1.5 cursor-pointer">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        ` : `
+                            <div class="flex items-center gap-2 bg-brand-600 text-white rounded-xl px-2 py-1.5 shadow-xs">
+                                <button onclick="updateCart(${item.id}, -1)" aria-label="Decrease quantity" class="w-6 h-6 rounded-lg hover:bg-brand-700 flex items-center justify-center text-xs font-bold transition cursor-pointer">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="text-sm font-bold min-w-[18px] text-center">${qty}</span>
+                                <button onclick="updateCart(${item.id}, 1)" aria-label="Increase quantity" class="w-6 h-6 rounded-lg hover:bg-brand-700 flex items-center justify-center text-xs font-bold transition cursor-pointer">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        `}
+                    </div>
+                </div>
+                `;
+            }).join("");
+        }
+
+        // Render All 20 Product Cards in Products View
+        function renderProducts() {
+            if (!productGrid) return;
+            const filtered = products.filter(item => {
+                const matchesCat = currentCategory === "All" || item.category === currentCategory;
+                const matchesSearch = item.name.toLowerCase().includes(searchQuery) ||
+                                      item.category.toLowerCase().includes(searchQuery) ||
+                                      item.weight.toLowerCase().includes(searchQuery);
+                return matchesCat && matchesSearch;
+            });
+
+            productCount.textContent = filtered.length;
+
+            if (filtered.length === 0) {
+                productGrid.innerHTML = "";
+                productGrid.classList.add("hidden");
+                emptyState.classList.remove("hidden");
+                return;
+            }
+
+            emptyState.classList.add("hidden");
+            productGrid.classList.remove("hidden");
+
+            productGrid.innerHTML = filtered.map(item => {
+                const qty = cart[item.id] || 0;
+                return `
+                <div class="bg-white rounded-3xl border border-slate-200/90 p-5 flex flex-col justify-between hover:shadow-lg hover:border-brand-300 transition group">
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-3">
+                            <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">
+                                ${item.category}
+                            </span>
+                            ${item.badge ? `<span class="text-[11px] font-bold text-brand-700 bg-brand-50 border border-brand-200 px-2.5 py-0.5 rounded-full">${item.badge}</span>` : ""}
+                        </div>
+
+                        <div class="h-36 rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/e2e8f0/475569?text=Grocery';">
+                        </div>
+
+                        <h3 class="font-bold text-slate-900 text-base leading-snug">${item.name}</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">${item.weight}</p>
+                    </div>
+
+                    <div class="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Price</span>
+                            <span class="text-lg font-extrabold text-slate-900">₹${item.price}</span>
+                        </div>
+
+                        ${qty === 0 ? `
+                            <button onclick="updateCart(${item.id}, 1)"
+                                class="px-3.5 py-2 rounded-xl bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white border border-brand-200 hover:border-brand-600 text-xs sm:text-sm font-bold transition flex items-center gap-1.5 cursor-pointer">
+                                <i class="fa-solid fa-plus"></i> Add
+                            </button>
+                        ` : `
+                            <div class="flex items-center gap-2 bg-brand-600 text-white rounded-xl px-2 py-1.5 shadow-xs">
+                                <button onclick="updateCart(${item.id}, -1)" aria-label="Decrease quantity" class="w-6 h-6 rounded-lg hover:bg-brand-700 flex items-center justify-center text-xs font-bold transition cursor-pointer">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="text-sm font-bold min-w-[18px] text-center">${qty}</span>
+                                <button onclick="updateCart(${item.id}, 1)" aria-label="Increase quantity" class="w-6 h-6 rounded-lg hover:bg-brand-700 flex items-center justify-center text-xs font-bold transition cursor-pointer">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                        `}
+                    </div>
+                </div>
+                `;
+            }).join("");
+        }
+
+        // Update Cart Quantities
+        function updateCart(productId, delta) {
+            const current = cart[productId] || 0;
+            const next = current + delta;
+            if (next <= 0) {
+                delete cart[productId];
+            } else {
+                cart[productId] = next;
+                if (delta > 0 && current === 0) {
+                    const item = products.find(p => p.id === productId);
+                    showToast(`Added "${item.name}" to your order list`);
+                }
+            }
+            renderProducts();
+            renderHomeFeatured();
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = {};
+            renderProducts();
+            renderHomeFeatured();
+            renderCart();
+        }
+
+        // Render Slide-Over Order List
+        function renderCart() {
+            const ids = Object.keys(cart).map(Number);
+            const totalItems = ids.reduce((sum, id) => sum + cart[id], 0);
+            if (cartBadge) cartBadge.textContent = totalItems;
+
+            if (!cartItemsContainer) return;
+
+            if (ids.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mx-auto mb-3">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-900">Your order list is empty</h4>
+                        <p class="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
+                            Tap "+ Add" on any grocery item to build a list and send it directly to Pramukh Super Mart on WhatsApp.
+                        </p>
+                    </div>
+                `;
+                if (cartTotal) cartTotal.textContent = "₹0";
+                return;
+            }
+
+            let totalAmount = 0;
+            cartItemsContainer.innerHTML = ids.map(id => {
+                const item = products.find(p => p.id === id);
+                const qty = cart[id];
+                const subtotal = item.price * qty;
+                totalAmount += subtotal;
+
+                return `
+                <div class="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-11 h-11 rounded-xl overflow-hidden bg-white border border-slate-200 shrink-0">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="min-w-0">
+                            <h4 class="text-sm font-bold text-slate-900 truncate">${item.name}</h4>
+                            <p class="text-xs text-slate-500">${item.weight} • ₹${item.price} each</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <div class="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl px-2 py-1">
+                            <button onclick="updateCart(${id}, -1)" class="w-5 h-5 text-slate-600 hover:text-brand-600 text-xs font-bold cursor-pointer">-</button>
+                            <span class="text-xs font-bold text-slate-900 min-w-[16px] text-center">${qty}</span>
+                            <button onclick="updateCart(${id}, 1)" class="w-5 h-5 text-slate-600 hover:text-brand-600 text-xs font-bold cursor-pointer">+</button>
+                        </div>
+                        <span class="text-sm font-extrabold text-slate-900 min-w-[48px] text-right">₹${subtotal}</span>
+                    </div>
+                </div>
+                `;
+            }).join("");
+
+            if (cartTotal) cartTotal.textContent = `₹${totalAmount}`;
+        }
+
+        // Send Order List via WhatsApp
+        function sendWhatsAppOrder() {
+            const ids = Object.keys(cart).map(Number);
+            if (ids.length === 0) {
+                window.open("https://wa.me/918141679293?text=Hello%20Pramukh%20Super%20Mart!%20I%20would%20like%20to%20place%20an%20order.", "_blank");
+                return;
+            }
+
+            let total = 0;
+            let lines = ["Hello *Pramukh Super Mart*! I would like to order the following items:", ""];
+            ids.forEach((id, index) => {
+                const item = products.find(p => p.id === id);
+                const qty = cart[id];
+                const sub = item.price * qty;
+                total += sub;
+                lines.push(`${index + 1}. ${item.name} (${item.weight}) x ${qty} = ₹${sub}`);
+            });
+            lines.push("");
+            lines.push(`*Estimated Total: ₹${total}*`);
+            lines.push("Please confirm availability & delivery in Pasodara, Surat.");
+
+            const encodedMessage = encodeURIComponent(lines.join("\n"));
+            window.open(`https://wa.me/918141679293?text=${encodedMessage}`, "_blank");
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById("cartDrawer");
+            if (drawer) drawer.classList.toggle("hidden");
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobileMenu");
+            if (menu) menu.classList.toggle("hidden");
+        }
+
+        function copyAddress() {
+            const address = "Pramukh Super Mart, Shop No 11 /12, SHREE UMIYA FARSAN AND SWEET MART, Saurashtra Residency, Pasodara Rd, Pasodara, Surat, Gujarat 395013";
+            const tempInput = document.createElement("textarea");
+            tempInput.value = address;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand("copy");
+                const btnText = document.getElementById("copyBtnText");
+                if (btnText) btnText.textContent = "Address Copied!";
+                showToast("Store address copied to clipboard!");
+                setTimeout(() => {
+                    if (btnText) btnText.textContent = "Copy Address";
+                }, 2500);
+            } catch (err) {
+                showToast("Could not copy address");
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toastMessage");
+            if (!toast || !toastMessage) return;
+            toastMessage.textContent = msg;
+            toast.classList.remove("hidden");
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 2200);
+        }
+    </script>
+</body>
+</html>
